@@ -34,8 +34,17 @@
     }
   </script>
   <style>
-    body { font-family: 'Open Sans', sans-serif; background-color: #111; color: #f4f1ea; overflow-x: hidden; }
+    html { overflow-x: hidden; width: 100%; }
+    body { font-family: 'Open Sans', sans-serif; background-color: #111; color: #f4f1ea; overflow-x: hidden; width: 100%; max-width:100%; position: relative; }
     .font-display { font-family: 'Montserrat', sans-serif; }
+
+    /* Any section, wrapper, or nav that hosts absolutely-positioned decorative
+       art must clip its own bounds so rotated/oversized images can never
+       widen the page and cause horizontal scroll on mobile. */
+    section, nav, .hero-bg {
+      position: relative;
+      overflow-x: hidden;
+    }
 
     .hero-bg {
       background:
@@ -104,6 +113,52 @@
       border-radius: 2px;
     }
 
+    .carousel-viewport { touch-action: pan-y; }
+
+    .carousel-arrow{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      width:44px;
+      height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:9999px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);
+      color:#f8f8f8;
+      backdrop-filter:blur(10px);
+      cursor:pointer;
+      transition:background .2s ease, border-color .2s ease, transform .2s ease;
+      z-index:10;
+    }
+    .carousel-arrow:hover{
+      background:rgba(221,51,51,0.25);
+      border-color:rgba(221,51,51,0.5);
+    }
+    .carousel-arrow:active{ transform:translateY(-50%) scale(0.92); }
+
+    @media (max-width:640px){
+      .carousel-arrow{ width:38px; height:38px; }
+    }
+
+    .carousel-dot{
+      width:9px;
+      height:9px;
+      border-radius:9999px;
+      background:rgba(255,255,255,0.2);
+      border:none;
+      padding:0;
+      cursor:pointer;
+      transition:background .2s ease, width .2s ease;
+    }
+    .carousel-dot.active{
+      background:#dd3333;
+      width:22px;
+      border-radius:9999px;
+    }
+
     .logo-hero{
         filter:
           drop-shadow(0 0 15px rgba(221,51,51,.4))
@@ -145,6 +200,7 @@
         user-select:none;
         opacity:.30;
         z-index:0;
+        max-width: 45vw;
         filter:
             drop-shadow(0 0 25px rgba(221,51,51,.25));
         transition:opacity .3s;
@@ -154,6 +210,7 @@
         .odino-bg{
             opacity:.25;
             width:140px !important;
+            max-width: 38vw;
         }
     }
 
@@ -194,6 +251,7 @@
       </a>
       <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide">
         <a href="#chi-siamo" class="hover:text-odeAccentLight transition-colors">CHI SIAMO</a>
+        <a href="#direttivo" class="hover:text-odeAccentLight transition-colors">DIRETTIVO</a>
         <a href="#cifre" class="hover:text-odeAccentLight transition-colors">LUDOTECA</a>
         <a href="#giocacon" class="hover:text-odeAccentLight transition-colors">GIOCA CON</a>
         <a href="#social" class="hover:text-odeAccentLight transition-colors">SOCIAL</a>
@@ -208,6 +266,7 @@
     </div>
     <div id="mobile-menu" class="md:hidden hidden bg-odeBlack border-t border-white/10 px-6 pb-6 pt-2 space-y-3">
       <a href="#chi-siamo" class="block text-sm font-bold hover:text-odeAccentLight">CHI SIAMO</a>
+      <a href="#direttivo" class="block text-sm font-bold hover:text-odeAccentLight">DIRETTIVO</a>
       <a href="#cifre" class="block text-sm font-bold hover:text-odeAccentLight">LUDOTECA</a>
       <a href="#giocacon" class="block text-sm font-bold hover:text-odeAccentLight">GIOCA CON</a>
       <a href="#social" class="block text-sm font-bold hover:text-odeAccentLight">SOCIAL</a>
@@ -217,7 +276,7 @@
   </nav>
 
   <!-- Hero -->
-  <section class="relative min-h-screen flex items-center justify-center hero-bg pt-20 pb-12 px-6">
+  <section class="min-h-screen flex items-center justify-center hero-bg pt-20 pb-12 px-6">
     <img
     src="./odino-1.png"
     class="odino-bg absolute top-24 right-20 w-96 rotate-6"
@@ -268,7 +327,7 @@
   </section>
 
   <!-- Chi Siamo -->
-  <section id="chi-siamo" class="relative py-24 px-6 bg-odeDark">
+  <section id="chi-siamo" class="py-24 px-6 bg-odeDark">
     <img
     src="./odino-2-Photoroom.png"
     class="odino-bg absolute bottom-0 left-0 w-72 -rotate-12"
@@ -318,8 +377,73 @@
     </div>
   </section>
 
+  <!-- Direttivo -->
+  <section id="direttivo" class="py-24 px-6 bg-odeBlack relative">
+    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">Il Direttivo</h2>
+      <p class="text-odeCream/70 max-w-2xl mx-auto">Le persone che ogni giorno tengono in piedi OdE, tra organizzazione, ludoteca ed eventi.</p>
+    </div>
+
+    <div class="max-w-3xl mx-auto relative reveal">
+      <div class="carousel-viewport overflow-hidden rounded-2xl">
+        <div id="direttivo-track" class="carousel-track flex transition-transform duration-500 ease-out">
+
+          <div class="carousel-slide w-full flex-shrink-0 px-2">
+            <div class="glass rounded-2xl p-8 text-center border border-white/10">
+              <img src="./odino-2-Photoroom.png" alt="Presidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
+              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
+              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Presidente</div>
+              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide w-full flex-shrink-0 px-2">
+            <div class="glass rounded-2xl p-8 text-center border border-white/10">
+              <img src="./odino-3-Photoroom.png" alt="Vicepresidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
+              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
+              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Vicepresidente</div>
+              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide w-full flex-shrink-0 px-2">
+            <div class="glass rounded-2xl p-8 text-center border border-white/10">
+              <img src="./odino-5-Photoroom.png" alt="Segretario" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
+              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
+              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Segretario</div>
+              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            </div>
+          </div>
+
+          <div class="carousel-slide w-full flex-shrink-0 px-2">
+            <div class="glass rounded-2xl p-8 text-center border border-white/10">
+              <img src="./odino-4-Photoroom.png" alt="Tesoriere" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
+              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
+              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Tesoriere</div>
+              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Frecce -->
+      <button id="direttivo-prev" aria-label="Precedente" class="carousel-arrow left-0 md:-left-6">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <button id="direttivo-next" aria-label="Successivo" class="carousel-arrow right-0 md:-right-6">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </button>
+
+      <!-- Puntini -->
+      <div id="direttivo-dots" class="flex justify-center gap-2 mt-6"></div>
+    </div>
+  </section>
+
   <!-- Cifre / Ludoteca -->
-  <section id="cifre" class="relative py-24 px-6 bg-odeBlack relative">
+  <section id="cifre" class="py-24 px-6 bg-odeBlack relative">
     <img
     src="./odino-3-Photoroom.png"
     class="odino-bg absolute top-12 right-10 w-80 rotate-12"
@@ -389,7 +513,7 @@
   </section>
 
   <!-- Social Section -->
-  <section id="social" class="relative py-24 px-6 bg-odeBlack relative">
+  <section id="social" class="py-24 px-6 bg-odeBlack relative">
     <img
     src="./odino-4-Photoroom.png"
     class="odino-bg absolute right-0 w-[430px]"
@@ -461,7 +585,7 @@
   </section>
 
   <!-- Contatti & CTA -->
-  <section id="contatti" class="relative py-24 px-6 bg-odeDark">
+  <section id="contatti" class="py-24 px-6 bg-odeDark">
     <img
     src="./odino-5-Photoroom.png"
     class="odino-bg absolute right-0 w-[430px]"
@@ -591,6 +715,74 @@
         nav.classList.remove('shadow-lg', 'bg-odeBlack/80');
       }
     });
+
+    // Carosello Direttivo
+    (function () {
+      const track = document.getElementById('direttivo-track');
+      if (!track) return;
+      const slides = Array.from(track.children);
+      const dotsWrap = document.getElementById('direttivo-dots');
+      const prevBtn = document.getElementById('direttivo-prev');
+      const nextBtn = document.getElementById('direttivo-next');
+      let index = 0;
+      let autoplayTimer = null;
+
+      // Crea i puntini
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Vai alla slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+      const dots = Array.from(dotsWrap.children);
+
+      function update() {
+        track.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === index));
+      }
+
+      function goTo(i) {
+        index = (i + slides.length) % slides.length;
+        update();
+        restartAutoplay();
+      }
+
+      function next() { goTo(index + 1); }
+      function prev() { goTo(index - 1); }
+
+      prevBtn.addEventListener('click', prev);
+      nextBtn.addEventListener('click', next);
+
+      function startAutoplay() {
+        autoplayTimer = setInterval(next, 6000);
+      }
+      function restartAutoplay() {
+        clearInterval(autoplayTimer);
+        startAutoplay();
+      }
+      startAutoplay();
+
+      // Swipe touch
+      let startX = 0;
+      let isDragging = false;
+      track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        clearInterval(autoplayTimer);
+      }, { passive: true });
+
+      track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const deltaX = e.changedTouches[0].clientX - startX;
+        if (Math.abs(deltaX) > 40) {
+          deltaX < 0 ? next() : prev();
+        } else {
+          restartAutoplay();
+        }
+      });
+    })();
   </script>
 </body>
 </html>
