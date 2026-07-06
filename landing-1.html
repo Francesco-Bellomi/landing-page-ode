@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orizzonte degli Eventi – ALL YOU CAN PLAY</title>
+  <meta name="description" content="Orizzonte degli Eventi (OdE) è l'associazione culturale ludica di Piacenza per giochi da tavolo e giochi di ruolo. Diventa socio, scopri la ludoteca e partecipa a GiocaCon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            odeDark: '#111111',
+            odeBlack: '#080808',
+
+            odeAccent: '#dd3333',
+            odeAccentLight: '#e84f4f',
+            odeAccentSoft: '#f16b6b',
+            odeAccentDark: '#b91c1c',
+
+            odeCream: '#f8f8f8',
+            odeGrey: '#cfcfcf'
+          },
+          fontFamily: {
+            display: ['Montserrat', 'sans-serif'],
+            body: ['Open Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Open Sans', sans-serif; background-color: #111; color: #f4f1ea; overflow-x: hidden; }
+    .font-display { font-family: 'Montserrat', sans-serif; }
+
+    .hero-bg {
+      background:
+        radial-gradient(circle at 20% 30%, rgba(221,51,51,0.25) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(232,79,79,0.18) 0%, transparent 55%),
+        radial-gradient(circle at center, rgba(185,28,28,0.15) 0%, transparent 70%),
+        #080808;
+    }
+    
+    .glass {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+
+    .glow-text {
+      text-shadow:
+        0 0 30px rgba(221,51,51,.5),
+        0 0 60px rgba(221,51,51,.25),
+        0 0 90px rgba(221,51,51,.15);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float { animation: float 4s ease-in-out infinite; }
+
+    .dice-icon {
+      display: inline-block;
+      width: 12px; height: 12px;      background: #e67e22; 
+      border-radius: 2px; 
+      margin: 0 6px;
+      transform: rotate(45deg);
+      opacity: 0.8;
+    }
+
+    .social-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .social-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gradient-bar {
+      height: 4px;
+      background: linear-gradient(
+          90deg,
+          #dd3333,
+          #ff6666,
+          #dd3333
+      );
+      width: 60px;
+      border-radius: 2px;
+    }
+
+    .logo-hero{
+        filter:
+          drop-shadow(0 0 15px rgba(221,51,51,.4))
+          drop-shadow(0 0 35px rgba(221,51,51,.25));
+    }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: 2.5rem !important; }
+    }
+
+    @media (max-width: 768px){
+
+      .hero-title{
+          font-size:2.8rem!important;
+          line-height:1.05;
+      }
+
+      h2{
+          font-size:2rem!important;
+      }
+
+      .glass{
+          padding:1rem;
+      }
+
+      .social-card{
+          margin-bottom:1rem;
+      }
+
+      .mobile-spacing{
+          padding-left:1rem;
+          padding-right:1rem;
+      }
+    }
+
+    .odino-bg{
+        position:absolute;
+        pointer-events:none;
+        user-select:none;
+        opacity:.30;
+        z-index:0;
+        filter:
+            drop-shadow(0 0 25px rgba(221,51,51,.25));
+        transition:opacity .3s;
+    }
+
+    @media(max-width:768px){
+        .odino-bg{
+            opacity:.25;
+            width:140px !important;
+        }
+    }
+
+    @keyframes odinoFloat{
+      0%{
+          transform:translateY(0px) rotate(0deg);
+      }
+      50%{
+          transform:translateY(-15px) rotate(2deg);
+      }
+      100%{
+          transform:translateY(0px) rotate(0deg);
+      }
+    }
+
+    .odino-bg{
+        animation:odinoFloat 8s ease-in-out infinite;
+    }
+
+  </style>
+</head>
+<body class="antialiased selection:bg-odeAccent selection:text-white">
+
+ <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 w-full z-50 glass border-b border-white/5 transition-all duration-300" id="navbar">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+      <span class="text-odeAccent text-2xl leading-none">
+        <img
+            src="./logo-orizzonte.png"
+            alt="Orizzonte degli Eventi"
+            class="w-14 h-14 rounded-full logo-hero"
+          />
+      </span> 
+      <a href="#" class="font-display font-black text-xl tracking-tighter text-odeCream flex items-center gap-2">
+        <span class="font-display font-black text-sm md:text-xl">
+          ORIZZONTE DEGLI EVENTI
+        </span>
+      </a>
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide">
+        <a href="#chi-siamo" class="hover:text-odeAccentLight transition-colors">CHI SIAMO</a>
+        <a href="#cifre" class="hover:text-odeAccentLight transition-colors">LUDOTECA</a>
+        <a href="#giocacon" class="hover:text-odeAccentLight transition-colors">GIOCA CON</a>
+        <a href="#social" class="hover:text-odeAccentLight transition-colors">SOCIAL</a>
+        <a href="#contatti" class="hover:text-odeAccentLight transition-colors">CONTATTI</a>
+      </div>
+      <a href="#diventa-socio" class="hidden md:inline-flex px-5 py-2.5 bg-odeAccent hover:bg-odeAccentLight text-white text-xs font-bold tracking-widest rounded transition-colors">
+        DIVENTA SOCIO
+      </a>
+      <button id="mobile-menu-btn" class="md:hidden text-odeCream">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden bg-odeBlack border-t border-white/10 px-6 pb-6 pt-2 space-y-3">
+      <a href="#chi-siamo" class="block text-sm font-bold hover:text-odeAccentLight">CHI SIAMO</a>
+      <a href="#cifre" class="block text-sm font-bold hover:text-odeAccentLight">LUDOTECA</a>
+      <a href="#giocacon" class="block text-sm font-bold hover:text-odeAccentLight">GIOCA CON</a>
+      <a href="#social" class="block text-sm font-bold hover:text-odeAccentLight">SOCIAL</a>
+      <a href="#contatti" class="block text-sm font-bold hover:text-odeAccentLight">CONTATTI</a>
+      <a href="#diventa-socio" class="block text-sm font-bold text-odeAccentLight">DIVENTA SOCIO →</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="relative min-h-screen flex items-center justify-center hero-bg pt-20 pb-12 px-6">
+    <img
+    src="./odino-1.png"
+    class="odino-bg absolute top-24 right-20 w-96 rotate-6"
+    alt=""
+    >
+    <img
+    src="./odino-6-Photoroom.png"
+    class="odino-bg absolute bottom-24 left-20 w-96 rotate-6"
+    alt=""
+    >
+    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\&quot;60\&quot; height=\&quot;60\&quot; viewBox=\&quot;0 0 60 60\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;%3E%3Cg fill=\&quot;none\&quot; fill-rule=\&quot;evenodd\&quot;%3E%3Cg fill=\&quot;%23dd3333\&quot; fill-opacity=\&quot;0.2\&quot;%3E%3Cpath d=\&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+
+      <div class="hidden md:flex mb-6 animate-float flex justify-center">
+        <img
+            src="./logo-orizzonte.png"
+            alt="Orizzonte degli Eventi"
+            class="w-48 md:w-64 h-auto rounded-full logo-hero"
+          />
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-bold tracking-widest text-odeAccentLight mb-6 animate-float">
+        <span class="w-2 h-2 rounded-full bg-odeAccentLight animate-pulse"></span>
+        ASSOCIAZIONE CULTURALE LUDICA - PIACENZA
+      </div>
+
+      <h1 class="hero-title font-display font-black text-6xl md:text-8xl text-odeCream leading-tight mb-6 glow-text">
+        ORIZZONTE<br/>DEGLI EVENTI
+      </h1>
+      <p class="text-xl md:text-2xl text-odeCream/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+        Il punto d'incontro a <span class="text-odeAccentLight font-semibold">Piacenza</span> per chi ama <span class="text-odeAccentLight font-semibold">giochi da tavolo</span> e <span class="text-odeAccentLight font-semibold">giochi di ruolo</span>.<br/>
+        <span class="text-sm md:text-base opacity-60 uppercase tracking-wider mt-2 block">All You Can Play • Dal 2007</span>
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="#diventa-socio" class="px-8 py-4 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-all shadow-lg shadow-odeAccent/20 hover:shadow-odeAccentLight/30">
+          ENTRA IN ODE
+        </a>
+        <a href="#cifre" class="px-8 py-4 glass hover:bg-white/5 text-odeCream font-bold tracking-widest rounded transition-all">
+          SCOPRI LA LUDOTECA
+        </a>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+      <svg class="w-6 h-6 text-odeCream" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </section>
+
+  <!-- Chi Siamo -->
+  <section id="chi-siamo" class="relative py-24 px-6 bg-odeDark">
+    <img
+    src="./odino-2-Photoroom.png"
+    class="odino-bg absolute bottom-0 left-0 w-72 -rotate-12"
+    alt=""
+    >
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div class="reveal">
+        <div class="gradient-bar mb-6"></div>
+        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeCream">Costruiamo il<br/>gioco insieme.</h2>
+        <p class="text-odeCream/80 text-lg leading-relaxed mb-6">
+          <strong class="text-odeAccentLight">Orizzonte degli Eventi</strong> (per gli amici OdE) nasce nel 2007 dalla passione di un gruppo di coraggiosi giocatori. Il nostro obiettivo è diffondere la cultura del gioco da tavolo e dei giochi di ruolo <em>giocando</em>.
+        </p>
+        <p class="text-odeCream/70 leading-relaxed mb-8">
+          Non vendiamo giochi: li facciamo provare, scoprire e amare. Se verrà la "scimmia", vi indirizzeremo verso i negozi convenzionati o il vostro "pusher di fiducia".
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="glass p-5 rounded">
+            <div class="text-odeAccentLight font-display font-black text-2xl">50+</div>
+            <div class="text-xs text-odeCream/60 uppercase tracking-wider mt-1">Volontari</div>
+          </div>
+          <div class="glass p-5 rounded">
+            <div class="text-odeAccentLight font-display font-black text-2xl">18+</div>
+            <div class="text-xs text-odeCream/60 uppercase tracking-wider mt-1">Anni di storia</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal relative">
+        <div class="absolute -inset-4 bg-odeAccent/20 blur-3xl rounded-full"></div>
+        <div class="relative glass rounded-2xl p-8 md:p-10 border border-white/10">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-12 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight text-xl">📍</div>
+            <div>
+              <div class="font-bold text-odeCream">Sede centrale</div>
+              <div class="text-odeCream/60 text-sm">Stradone Farnese, 26 – Piacenza</div>
+            </div>
+          </div>
+          <p class="text-odeCream/80 mb-6">
+            Entra senza impegno con il <strong>mese di prova gratuito</strong> come visitatore. Se l'atmosfera e la compagnia saranno di tuo gradimento, potrai diventare socio e accedere liberamente a ore e ore di gioco.
+          </p>
+          <ul class="space-y-3 text-odeCream/70">
+            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Novità, prototipi e classiconi</li>
+            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Ambiente pensato per adulti e ragazzi 14+ (accompagnati)</li>
+            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Eventi locali, GiocaCon e serate a tema</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cifre / Ludoteca -->
+  <section id="cifre" class="relative py-24 px-6 bg-odeBlack relative">
+    <img
+    src="./odino-3-Photoroom.png"
+    class="odino-bg absolute top-12 right-10 w-80 rotate-12"
+    alt=""
+    >
+    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">La Ludoteca</h2>
+      <p class="text-odeCream/70 max-w-2xl mx-auto">Un patrimonio di giochi sempre in crescita, gestito da appassionati per appassionati.</p>
+    </div>
+    
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="glass rounded-2xl p-8 text-center social-card reveal">
+        <div class="text-5xl mb-4">🎲</div>
+        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="300">0</div>
+        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Giochi in Ludoteca</div>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center social-card reveal">
+        <div class="text-5xl mb-4">⏳</div>
+        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="800">0</div>
+        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Ore di gioco / anno</div>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center social-card reveal">
+        <div class="text-5xl mb-4">🧙‍♂️</div>
+        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="50">0</div>
+        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Volontari attivi</div>
+      </div>
+      <div class="glass rounded-2xl p-8 text-center social-card reveal">
+        <div class="text-5xl mb-4">🏆</div>
+        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="18">0</div>
+        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Anni di storia</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GiocaCon -->
+  <section id="giocacon" class="py-24 px-6 bg-odeDark">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div class="order-2 md:order-1 relative reveal">
+        <div class="absolute -inset-4 bg-odeAccent/10 blur-2xl rounded-full"></div>
+        <div class="relative glass rounded-2xl p-8 border border-white/10 text-center">
+          <div class="text-6xl mb-4 flex justify-center">
+            <img
+            src="./giocacon.png"
+            alt="Orizzonte degli Eventi"
+            class="w-26 h-26 logo-hero"
+            />
+          </div>
+          <p class="text-odeCream/80 mb-6 text-lg">Dal 2013 la nostra convention per diffondere la passione ludica il più possibile. Un weekend dedicato all'analogico, al divertimento e alla community.</p>
+ <a href="https://www.giocacon.it" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-colors">
+            VAI AL SITO <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="order-1 md:order-2 reveal">
+        <div class="gradient-bar mb-6"></div>
+        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeCream">Organizziamo<br/>GiocaCon.</h2>
+        <p class="text-odeCream/80 text-lg leading-relaxed mb-6">
+          Ogni anno portiamo a Piacenza la più grande celebrazione del gioco da tavolo: tornei, aree free-play, presentazioni di anteprime e la presenza di autori e case editrici.
+        </p>
+        <p class="text-odeCream/70 leading-relaxed">
+          Ma il nostro impegno non si ferma alla convention: trovate i tavoli OdE anche nelle manifestazioni locali, dalle serate estive a Grazzano Visconti ai numerosi eventi in città e provincia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Section -->
+  <section id="social" class="relative py-24 px-6 bg-odeBlack relative">
+    <img
+    src="./odino-4-Photoroom.png"
+    class="odino-bg absolute right-0 w-[430px]"
+    alt=""
+    >
+    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">Segui OdE</h2>
+      <p class="text-odeCream/70 max-w-2xl mx-auto">Resta aggiornato su eventi, live, unboxing e le serate in sede sui nostri canali social.</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+      <!-- YouTube -->
+      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+        <div class="h-2 bg-red-600"></div>
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.5 31.5 0 000 12a31.5 31.5 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.5 31.5 0 0024 12a31.5 31.5 0 00-.5-5.81zM9.55 15.5V8.5l6.27 3.5-6.27 3.5z"/></svg>
+            <span class="font-display font-bold text-xl text-white">YouTube</span>
+          </div>
+          <p class="text-odeCream/70 mb-6 text-sm">Gameplay, tutorial, interviste e report dalle nostre serate.</p>
+          <div class="aspect-video bg-black/40 rounded flex items-center justify-center mb-4 border border-white/10">
+            <span class="text-odeCream/40 text-sm">Anteprima canale</span>
+          </div>
+          <a href="https://www.youtube.com/@orizzonteventi" target="_blank" class="block w-full text-center px-4 py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold tracking-wider text-xs rounded transition-colors border border-red-500/30">
+            VISITA IL CANALE
+          </a>
+        </div>
+      </div>
+
+      <!-- Instagram -->
+      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+        <div class="h-2 bg-pink-600"></div>
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-8 h-8 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.24 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.23.23 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.16 4.35 2.63 6.82 6.98 6.98 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 4.35-.16 6.82-2.63 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.16-4.35-2.63-6.82-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a44 0 110-8 4 4 0 010 8zm7.85-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
+            <span class="font-display font-bold text-xl text-white">Instagram</span>
+          </div>
+          <p class="text-odeCream/70 mb-6 text-sm">Foto delle serate, storie in diretta e tutto il dietro le quinte.</p>
+          <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
+            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
+            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
+          </div>
+          <a href="https://www.instagram.com/orizzonteventi/" target="_blank" class="block w-full text-center px-4 py-3 bg-pink-600/20 hover:bg-pink-600/30 text-pink-400 font-bold tracking-wider text-xs rounded transition-colors border border-pink-500/30">
+            SEGUICI SU INSTAGRAM </a>
+        </div>
+      </div>
+
+      <!-- Facebook / Social Misto -->
+      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+        <div class="h-2 bg-blue-500"></div>
+        <div class="p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.12 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
+            <span class="font-display font-bold text-xl text-white">Facebook</span>
+          </div>
+          <p class="text-odeCream/70 mb-6 text-sm">Eventi, discussioni di gruppo, comunicazioni e aggiornamenti ufficiali.</p>
+          <div class="aspect-video bg-black/40 rounded flex items-center justify-center mb-4 border border-white/10">
+            <span class="text-odeCream/40 text-sm">Community</span>
+          </div>
+          <a href="https://www.facebook.com/orizzonteventi" target="_blank" class="block w-full text-center px-4 py-3 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 font-bold tracking-wider text-xs rounded transition-colors border border-blue-500/30">
+            UNISCITI SU FACEBOOK
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contatti & CTA -->
+  <section id="contatti" class="relative py-24 px-6 bg-odeDark">
+    <img
+    src="./odino-5-Photoroom.png"
+    class="odino-bg absolute right-0 w-[430px]"
+    alt=""
+    >
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+      <div class="reveal">
+        <div class="gradient-bar mb-6"></div>
+        <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-6">Vieni a<br/>trovarci.</h2>
+        <p class="text-odeCream/80 text-lg leading-relaxed mb-8">
+          La nostra sede è a <strong class="text-odeAccentLight">Piacenza</strong>, in Stradone Farnese. Ti aspettiamo per farti provare i nostri giochi e conoscere la community.
+        </p>
+        <div class="space-y-5">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">📍</div>
+            <div>
+              <div class="font-bold text-odeCream">Sede</div>
+              <div class="text-odeCream/60 text-sm">Stradone Farnese, 26 – 29121 Piacenza (PC)</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">✉️</div>
+            <div>
+              <div class="font-bold text-odeCream">Email</div>
+              <div class="text-odeCream/60 text-sm">info@orizzonteventi.org</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">📱</div>
+            <div>
+              <div class="font-bold text-odeCream">Telefono</div>
+              <div class="text-odeCream/60 text-sm">+39 342 777 9234</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="diventa-socio" class="reveal relative">
+        <div class="absolute -inset-4 bg-odeAccent/10 blur-2xl rounded-full"></div>
+        <div class="relative glass rounded-2xl p-8 md:p-10 border border-white/10">
+          <h3 class="font-display font-black text-2xl text-odeAccentLight mb-2">Diventa Socio!</h3>
+          <p class="text-odeCream/70 mb-6 text-sm">Compila il form per richiedere informazioni o il mese di prova. Ti risponderemo al più presto.</p>
+          <form onsubmit="event.preventDefault(); this.innerHTML='<div class=\'text-center py-8\'><div class=\'text-odeAccentLight text-5xl mb-4\'>🎲</div><div class=\'font-bold text-odeCream\'>Messaggio inviato!</div><div class=\'text-odeCream/60 text-sm mt-2\'>Ti contatteremo presto.</div></div>';" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Nome</label>
+              <input type="text" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="Il tuo nome" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Email</label>
+              <input type="email" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="email@esempio.it" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Messaggio</label>
+              <textarea rows="3" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="Scrivi il tuo messaggio..."></textarea>
+            </div>
+            <button type="submit" class="w-full py-3.5 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-colors shadow-lg shadow-odeAccent/20">
+              INVIA RICHIESTA
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-odeBlack border-t border-white/5 pt-16 pb-8 px-6 text-center">
+    <div class="max-w-7xl mx-auto mb-12">
+      <div class="flex items-center justify-center gap-2 font-display font-black text-2xl tracking-tighter text-odeCream mb-6">
+        <span class="text-odeAccent">◈</span> ODE
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 text-sm font-bold uppercase tracking-widest text-odeCream/50">
+        <a href="https://www.facebook.com/orizzonteventi" target="_blank" class="hover:text-odeAccentLight transition-colors">Facebook</a>
+        <a href="https://www.instagram.com/orizzonteventi/" target="_blank" class="hover:text-odeAccentLight transition-colors">Instagram</a>
+        <a href="https://www.youtube.com/@orizzonteventi" target="_blank" class="hover:text-odeAccentLight transition-colors">YouTube</a>
+ <a href="https://www.giocacon.it" target="_blank" class="hover:text-odeAccentLight transition-colors">GiocaCon</a>
+      </div>
+    </div>
+    <div class="text-odeCream/30 text-xs max-w-2xl mx-auto leading-relaxed">
+      ©2026 Orizzonte degli Eventi – Associazione Culturale Ludica | Piacenza.<br/>
+      No profit. Tutti i diritti riservati. <span class="block mt-1">Sede: Stradone Farnese, 26 – 29121 Piacenza (PC) – Tel. +39 342 777 9234</span>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Animated counters
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.getAttribute('data-target');
+          const duration = 2000;
+          const start = performance.now();
+          function update(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(ease * target) + "+";
+            if (progress < 1) requestAnimationFrame(update);
+          }
+          requestAnimationFrame(update);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter').forEach(el => countObserver.observe(el));
+
+    // Navbar blur on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('shadow-lg', 'bg-odeBlack/80');
+      } else {
+        nav.classList.remove('shadow-lg', 'bg-odeBlack/80');
+      }
+    });
+  </script>
+</body>
+</html>
