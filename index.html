@@ -14,7 +14,7 @@
       theme: {
         extend: {
           colors: {
-            odeDark: '#111111',
+            odeDark: '#1a1a1a',
             odeBlack: '#080808',
 
             odeAccent: '#dd3333',
@@ -23,7 +23,14 @@
             odeAccentDark: '#b91c1c',
 
             odeCream: '#f8f8f8',
-            odeGrey: '#cfcfcf'
+            odeGrey: '#cfcfcf',
+
+            /* light-theme additions */
+            odeWhite: '#ffffff',
+            odePaper: '#f7f7f7',
+            odeInk: '#111111',
+            odeMid: '#555555',
+            odeFaint: '#888888',
           },
           fontFamily: {
             display: ['Montserrat', 'sans-serif'],
@@ -35,60 +42,58 @@
   </script>
   <style>
     html { overflow-x: hidden; width: 100%; }
-    body { font-family: 'Open Sans', sans-serif; background-color: #111; color: #f4f1ea; overflow-x: hidden; width: 100%; max-width:100%; position: relative; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100%;
+      position: relative;
+    }
     .font-display { font-family: 'Montserrat', sans-serif; }
 
-    /* Any section, wrapper, or nav that hosts absolutely-positioned decorative
-       art must clip its own bounds so rotated/oversized images can never
-       widen the page and cause horizontal scroll on mobile. */
     section, nav, .hero-bg {
       position: relative;
       overflow-x: hidden;
     }
 
+    /* ── Hero ── */
     .hero-bg {
       background:
-        radial-gradient(circle at 20% 30%, rgba(221,51,51,0.25) 0%, transparent 55%),
-        radial-gradient(circle at 80% 70%, rgba(232,79,79,0.18) 0%, transparent 55%),
-        radial-gradient(circle at center, rgba(185,28,28,0.15) 0%, transparent 70%),
-        #080808;
+        radial-gradient(circle at 20% 30%, rgba(221,51,51,0.08) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(232,79,79,0.06) 0%, transparent 55%),
+        radial-gradient(circle at center, rgba(185,28,28,0.05) 0%, transparent 70%),
+        #ffffff;
     }
-    
+
+    /* ── Glass – light version ── */
     .glass {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
     }
 
-
+    /* ── Glow text – red on white ── */
     .glow-text {
       text-shadow:
-        0 0 30px rgba(221,51,51,.5),
-        0 0 60px rgba(221,51,51,.25),
-        0 0 90px rgba(221,51,51,.15);
+        0 0 30px rgba(221,51,51,.15),
+        0 0 60px rgba(221,51,51,.08);
     }
 
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-8px); }
+      50%       { transform: translateY(-8px); }
     }
     .animate-float { animation: float 4s ease-in-out infinite; }
-
-    .dice-icon {
-      display: inline-block;
-      width: 12px; height: 12px;      background: #e67e22; 
-      border-radius: 2px; 
-      margin: 0 6px;
-      transform: rotate(45deg);
-      opacity: 0.8;
-    }
 
     .social-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .social-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
     }
 
     .reveal {
@@ -103,287 +108,256 @@
 
     .gradient-bar {
       height: 4px;
-      background: linear-gradient(
-          90deg,
-          #dd3333,
-          #ff6666,
-          #dd3333
-      );
+      background: linear-gradient(90deg, #dd3333, #ff6666, #dd3333);
       width: 60px;
       border-radius: 2px;
     }
 
     .carousel-viewport { touch-action: pan-y; }
 
-    .carousel-arrow{
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      width:44px;
-      height:44px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:9999px;
-      background:rgba(255,255,255,0.06);
-      border:1px solid rgba(255,255,255,0.12);
-      color:#f8f8f8;
-      backdrop-filter:blur(10px);
-      cursor:pointer;
-      transition:background .2s ease, border-color .2s ease, transform .2s ease;
-      z-index:10;
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      background: rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.12);
+      color: #111;
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+      z-index: 10;
     }
-    .carousel-arrow:hover{
-      background:rgba(221,51,51,0.25);
-      border-color:rgba(221,51,51,0.5);
+    .carousel-arrow:hover {
+      background: rgba(221,51,51,0.12);
+      border-color: rgba(221,51,51,0.4);
+      color: #dd3333;
     }
-    .carousel-arrow:active{ transform:translateY(-50%) scale(0.92); }
+    .carousel-arrow:active { transform: translateY(-50%) scale(0.92); }
 
     @media (max-width:640px){
-      .carousel-arrow{ width:38px; height:38px; }
+      .carousel-arrow { width: 38px; height: 38px; }
     }
 
-    .carousel-dot{
-      width:9px;
-      height:9px;
-      border-radius:9999px;
-      background:rgba(255,255,255,0.2);
-      border:none;
-      padding:0;
-      cursor:pointer;
-      transition:background .2s ease, width .2s ease;
+    .carousel-dot {
+      width: 9px; height: 9px;
+      border-radius: 9999px;
+      background: rgba(0,0,0,0.18);
+      border: none; padding: 0;
+      cursor: pointer;
+      transition: background .2s ease, width .2s ease;
     }
-    .carousel-dot.active{
-      background:#dd3333;
-      width:22px;
-      border-radius:9999px;
+    .carousel-dot.active {
+      background: #dd3333;
+      width: 22px;
+      border-radius: 9999px;
     }
 
-    .logo-hero{
-        filter:
-          drop-shadow(0 0 15px rgba(221,51,51,.4))
-          drop-shadow(0 0 35px rgba(221,51,51,.25));
+    .logo-hero {
+      filter: drop-shadow(0 0 15px rgba(221,51,51,.25)) drop-shadow(0 0 35px rgba(221,51,51,.12));
     }
 
-    @media (max-width: 640px) {
-      .hero-title { font-size: 2.5rem !important; }
+    @media (max-width: 640px)  { .hero-title { font-size: 2.5rem !important; } }
+    @media (max-width: 768px)  {
+      .hero-title { font-size: 2.8rem !important; line-height: 1.05; }
+      h2 { font-size: 2rem !important; }
+      .glass { padding: 1rem; }
+      .social-card { margin-bottom: 1rem; }
+      .mobile-spacing { padding-left: 1rem; padding-right: 1rem; }
     }
 
-    @media (max-width: 768px){
-
-      .hero-title{
-          font-size:2.8rem!important;
-          line-height:1.05;
-      }
-
-      h2{
-          font-size:2rem!important;
-      }
-
-      .glass{
-          padding:1rem;
-      }
-
-      .social-card{
-          margin-bottom:1rem;
-      }
-
-      .mobile-spacing{
-          padding-left:1rem;
-          padding-right:1rem;
-      }
+    .odino-bg {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      opacity: .14;
+      z-index: 0;
+      max-width: 45vw;
+      filter: drop-shadow(0 0 25px rgba(221,51,51,.2));
+      transition: opacity .3s;
     }
-
-    .odino-bg{
-        position:absolute;
-        pointer-events:none;
-        user-select:none;
-        opacity:.30;
-        z-index:0;
-        max-width: 45vw;
-        filter:
-            drop-shadow(0 0 25px rgba(221,51,51,.25));
-        transition:opacity .3s;
-    }
-
     @media(max-width:768px){
-        .odino-bg{
-            opacity:.25;
-            width:140px !important;
-            max-width: 38vw;
-        }
+      .odino-bg { opacity: .10; width: 140px !important; max-width: 38vw; }
+    }
+    @keyframes odinoFloat {
+      0%   { transform: translateY(0px)   rotate(0deg); }
+      50%  { transform: translateY(-15px) rotate(2deg); }
+      100% { transform: translateY(0px)   rotate(0deg); }
+    }
+    .odino-bg { animation: odinoFloat 8s ease-in-out infinite; }
+
+    /* ── Photo grid placeholders ── */
+    .photo-slot {
+      background: #f5f5f5;
+      border: 2px dashed #e0e0e0;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: border-color .2s, background .2s;
+      overflow: hidden;
+    }
+    .photo-slot:hover {
+      border-color: rgba(221,51,51,0.35);
+      background: #fdf5f5;
+    }
+    .photo-slot img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 10px;
     }
 
-    @keyframes odinoFloat{
-      0%{
-          transform:translateY(0px) rotate(0deg);
-      }
-      50%{
-          transform:translateY(-15px) rotate(2deg);
-      }
-      100%{
-          transform:translateY(0px) rotate(0deg);
-      }
-    }
-
-    .odino-bg{
-        animation:odinoFloat 8s ease-in-out infinite;
-    }
-
+    /* ── Divider line in red/light context ── */
+    .section-divider { height: 1px; background: rgba(221,51,51,0.15); }
   </style>
 </head>
 <body class="antialiased selection:bg-odeAccent selection:text-white">
 
- <!-- Nav -->
-  <nav class="fixed top-0 left-0 right-0 w-full z-50 glass border-b border-white/5 transition-all duration-300" id="navbar">
+  <!-- Nav -->
+  <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-black/6 shadow-sm transition-all duration-300" id="navbar">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
       <span class="text-odeAccent text-2xl leading-none">
-        <img
-            src="./logo-orizzonte.png"
-            alt="Orizzonte degli Eventi"
-            class="w-14 h-14 rounded-full logo-hero"
-          />
-      </span> 
-      <a href="#" class="font-display font-black text-xl tracking-tighter text-odeCream flex items-center gap-2">
-        <span class="font-display font-black text-sm md:text-xl">
-          ORIZZONTE DEGLI EVENTI
-        </span>
+        <img src="./logo-orizzonte.png" alt="Orizzonte degli Eventi" class="w-14 h-14 rounded-full logo-hero" />
+      </span>
+      <a href="#" class="font-display font-black text-xl tracking-tighter text-odeInk flex items-center gap-2">
+        <span class="font-display font-black text-sm md:text-xl">ORIZZONTE DEGLI EVENTI</span>
       </a>
-      <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide">
-        <a href="#chi-siamo" class="hover:text-odeAccentLight transition-colors">CHI SIAMO</a>
-        <a href="#direttivo" class="hover:text-odeAccentLight transition-colors">DIRETTIVO</a>
-        <a href="#cifre" class="hover:text-odeAccentLight transition-colors">LUDOTECA</a>
-        <a href="#giocacon" class="hover:text-odeAccentLight transition-colors">GIOCA CON</a>
-        <a href="#social" class="hover:text-odeAccentLight transition-colors">SOCIAL</a>
-        <a href="#contatti" class="hover:text-odeAccentLight transition-colors">CONTATTI</a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold tracking-wide text-gray-700">
+        <a href="#chi-siamo"   class="hover:text-odeAccent transition-colors">CHI SIAMO</a>
+        <a href="#direttivo"   class="hover:text-odeAccent transition-colors">DIRETTIVO</a>
+        <a href="#cifre"       class="hover:text-odeAccent transition-colors">LUDOTECA</a>
+        <a href="#giochi"      class="hover:text-odeAccent transition-colors">GIOCHI</a>
+        <a href="#calendario"  class="hover:text-odeAccent transition-colors">CALENDARIO</a>
+        <a href="#giocacon"    class="hover:text-odeAccent transition-colors">GIOCA CON</a>
+        <a href="#social"      class="hover:text-odeAccent transition-colors">SOCIAL</a>
+        <a href="#contatti"    class="hover:text-odeAccent transition-colors">CONTATTI</a>
       </div>
-      <a href="#diventa-socio" class="hidden md:inline-flex px-5 py-2.5 bg-odeAccent hover:bg-odeAccentLight text-white text-xs font-bold tracking-widest rounded transition-colors">
+      <a href="#diventa-socio" class="hidden md:inline-flex px-5 py-2.5 bg-odeAccent hover:bg-odeAccentLight text-white text-xs font-bold tracking-widest rounded transition-colors shadow-md shadow-odeAccent/20">
         DIVENTA SOCIO
       </a>
-      <button id="mobile-menu-btn" class="md:hidden text-odeCream">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <button id="mobile-menu-btn" class="md:hidden text-odeInk">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
       </button>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden bg-odeBlack border-t border-white/10 px-6 pb-6 pt-2 space-y-3">
-      <a href="#chi-siamo" class="block text-sm font-bold hover:text-odeAccentLight">CHI SIAMO</a>
-      <a href="#direttivo" class="block text-sm font-bold hover:text-odeAccentLight">DIRETTIVO</a>
-      <a href="#cifre" class="block text-sm font-bold hover:text-odeAccentLight">LUDOTECA</a>
-      <a href="#giocacon" class="block text-sm font-bold hover:text-odeAccentLight">GIOCA CON</a>
-      <a href="#social" class="block text-sm font-bold hover:text-odeAccentLight">SOCIAL</a>
-      <a href="#contatti" class="block text-sm font-bold hover:text-odeAccentLight">CONTATTI</a>
-      <a href="#diventa-socio" class="block text-sm font-bold text-odeAccentLight">DIVENTA SOCIO →</a>
+    <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 px-6 pb-6 pt-2 space-y-3">
+      <a href="#chi-siamo"  class="block text-sm font-bold hover:text-odeAccent text-gray-800">CHI SIAMO</a>
+      <a href="#direttivo"  class="block text-sm font-bold hover:text-odeAccent text-gray-800">DIRETTIVO</a>
+      <a href="#cifre"      class="block text-sm font-bold hover:text-odeAccent text-gray-800">LUDOTECA</a>
+      <a href="#giochi"     class="block text-sm font-bold hover:text-odeAccent text-gray-800">GIOCHI</a>
+      <a href="#calendario" class="block text-sm font-bold hover:text-odeAccent text-gray-800">CALENDARIO</a>
+      <a href="#giocacon"   class="block text-sm font-bold hover:text-odeAccent text-gray-800">GIOCA CON</a>
+      <a href="#social"     class="block text-sm font-bold hover:text-odeAccent text-gray-800">SOCIAL</a>
+      <a href="#contatti"   class="block text-sm font-bold hover:text-odeAccent text-gray-800">CONTATTI</a>
+      <a href="#diventa-socio" class="block text-sm font-bold text-odeAccent">DIVENTA SOCIO →</a>
     </div>
   </nav>
 
   <!-- Hero -->
   <section class="min-h-screen flex items-center justify-center hero-bg pt-20 pb-12 px-6">
-    <img
-    src="./odino-1.png"
-    class="odino-bg absolute top-24 right-20 w-96 rotate-6"
-    alt=""
-    >
-    <img
-    src="./odino-6-Photoroom.png"
-    class="odino-bg absolute bottom-24 left-20 w-96 rotate-6"
-    alt=""
-    >
-    <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg width=\&quot;60\&quot; height=\&quot;60\&quot; viewBox=\&quot;0 0 60 60\&quot; xmlns=\&quot;http://www.w3.org/2000/svg\&quot;%3E%3Cg fill=\&quot;none\&quot; fill-rule=\&quot;evenodd\&quot;%3E%3Cg fill=\&quot;%23dd3333\&quot; fill-opacity=\&quot;0.2\&quot;%3E%3Cpath d=\&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    <img src="./odino-1.png"            class="odino-bg absolute top-24 right-20 w-96 rotate-6"    alt="">
+    <img src="./odino-6-Photoroom.png"  class="odino-bg absolute bottom-24 left-20 w-96 rotate-6" alt="">
+
+    <div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image:url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23dd3333%22 fill-opacity=%220.4%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
 
     <div class="max-w-5xl mx-auto text-center relative z-10">
-
-      <div class="hidden md:flex mb-6 animate-float flex justify-center">
-        <img
-            src="./logo-orizzonte.png"
-            alt="Orizzonte degli Eventi"
-            class="w-48 md:w-64 h-auto rounded-full logo-hero"
-          />
+      <div class="hidden md:flex mb-6 animate-float justify-center">
+        <img src="./logo-orizzonte.png" alt="Orizzonte degli Eventi" class="w-48 md:w-64 h-auto rounded-full logo-hero" />
       </div>
 
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-bold tracking-widest text-odeAccentLight mb-6 animate-float">
-        <span class="w-2 h-2 rounded-full bg-odeAccentLight animate-pulse"></span>
-        ASSOCIAZIONE CULTURALE LUDICA - PIACENZA
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-odeAccent/10 border border-odeAccent/20 text-xs font-bold tracking-widest text-odeAccent mb-6 animate-float">
+        <span class="w-2 h-2 rounded-full bg-odeAccent animate-pulse"></span>
+        ASSOCIAZIONE CULTURALE LUDICA – PIACENZA
       </div>
 
-      <h1 class="hero-title font-display font-black text-6xl md:text-8xl text-odeCream leading-tight mb-6 glow-text">
-        ORIZZONTE<br/>DEGLI EVENTI
+      <h1 class="hero-title font-display font-black text-6xl md:text-8xl text-odeInk leading-tight mb-6 glow-text">
+        ORIZZONTE<br/><span class="text-odeAccent">DEGLI EVENTI</span>
       </h1>
-      <p class="text-xl md:text-2xl text-odeCream/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
-        Il punto d'incontro a <span class="text-odeAccentLight font-semibold">Piacenza</span> per chi ama <span class="text-odeAccentLight font-semibold">giochi da tavolo</span> e <span class="text-odeAccentLight font-semibold">giochi di ruolo</span>.<br/>
-        <span class="text-sm md:text-base opacity-60 uppercase tracking-wider mt-2 block">All You Can Play • Dal 2007</span>
+      <p class="text-xl md:text-2xl text-gray-600 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+        Il punto d'incontro a <span class="text-odeAccent font-semibold">Piacenza</span> per chi ama
+        <span class="text-odeAccent font-semibold">giochi da tavolo</span> e
+        <span class="text-odeAccent font-semibold">giochi di ruolo</span>.<br/>
+        <span class="text-sm md:text-base text-gray-400 uppercase tracking-wider mt-2 block">All You Can Play • Dal 2007</span>
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#diventa-socio" class="px-8 py-4 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-all shadow-lg shadow-odeAccent/20 hover:shadow-odeAccentLight/30">
+        <a href="#diventa-socio" class="px-8 py-4 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-all shadow-lg shadow-odeAccent/25 hover:shadow-odeAccentLight/35">
           ENTRA IN ODE
         </a>
-        <a href="#cifre" class="px-8 py-4 glass hover:bg-white/5 text-odeCream font-bold tracking-widest rounded transition-all">
+        <a href="#cifre" class="px-8 py-4 border border-gray-200 hover:bg-gray-50 text-gray-800 font-bold tracking-widest rounded transition-all">
           SCOPRI LA LUDOTECA
         </a>
       </div>
     </div>
-    
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
-      <svg class="w-6 h-6 text-odeCream" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-40">
+      <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- Chi Siamo -->
-  <section id="chi-siamo" class="py-24 px-6 bg-odeDark">
-    <img
-    src="./odino-2-Photoroom.png"
-    class="odino-bg absolute bottom-0 left-0 w-72 -rotate-12"
-    alt=""
-    >
+  <section id="chi-siamo" class="py-24 px-6 bg-white">
+    <img src="./odino-2-Photoroom.png" class="odino-bg absolute bottom-0 left-0 w-72 -rotate-12" alt="">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
       <div class="reveal">
         <div class="gradient-bar mb-6"></div>
-        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeCream">Costruiamo il<br/>gioco insieme.</h2>
-        <p class="text-odeCream/80 text-lg leading-relaxed mb-6">
-          <strong class="text-odeAccentLight">Orizzonte degli Eventi</strong> (per gli amici OdE) nasce nel 2007 dalla passione di un gruppo di coraggiosi giocatori. Il nostro obiettivo è diffondere la cultura del gioco da tavolo e dei giochi di ruolo <em>giocando</em>.
+        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeInk">Costruiamo il<br/>gioco insieme.</h2>
+        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+          <strong class="text-odeAccent">Orizzonte degli Eventi</strong> (per gli amici OdE) nasce nel 2007 dalla passione di un gruppo di coraggiosi giocatori. Il nostro obiettivo è diffondere la cultura del gioco da tavolo e dei giochi di ruolo <em>giocando</em>.
         </p>
-        <p class="text-odeCream/70 leading-relaxed mb-8">
+        <p class="text-gray-500 leading-relaxed mb-8">
           Non vendiamo giochi: li facciamo provare, scoprire e amare. Se verrà la "scimmia", vi indirizzeremo verso i negozi convenzionati o il vostro "pusher di fiducia".
         </p>
         <div class="grid grid-cols-2 gap-4">
-          <div class="glass p-5 rounded">
-            <div class="text-odeAccentLight font-display font-black text-2xl">50+</div>
-            <div class="text-xs text-odeCream/60 uppercase tracking-wider mt-1">Volontari</div>
+          <div class="bg-odeAccent/5 border border-odeAccent/15 p-5 rounded-xl">
+            <div class="text-odeAccent font-display font-black text-2xl">50+</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Volontari</div>
           </div>
-          <div class="glass p-5 rounded">
-            <div class="text-odeAccentLight font-display font-black text-2xl">18+</div>
-            <div class="text-xs text-odeCream/60 uppercase tracking-wider mt-1">Anni di storia</div>
+          <div class="bg-odeAccent/5 border border-odeAccent/15 p-5 rounded-xl">
+            <div class="text-odeAccent font-display font-black text-2xl">18+</div>
+            <div class="text-xs text-gray-500 uppercase tracking-wider mt-1">Anni di storia</div>
           </div>
         </div>
       </div>
       <div class="reveal relative">
-        <div class="absolute -inset-4 bg-odeAccent/20 blur-3xl rounded-full"></div>
-        <div class="relative glass rounded-2xl p-8 md:p-10 border border-white/10">
+        <div class="absolute -inset-4 bg-odeAccent/8 blur-3xl rounded-full"></div>
+        <div class="relative glass rounded-2xl p-8 md:p-10">
           <div class="flex items-center gap-4 mb-6">
-            <div class="w-12 h-12 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight text-xl">📍</div>
+            <div class="w-12 h-12 rounded-full bg-odeAccent/10 flex items-center justify-center text-odeAccent text-xl">📍</div>
             <div>
-              <div class="font-bold text-odeCream">Sede centrale</div>
-              <div class="text-odeCream/60 text-sm">Stradone Farnese, 26 – Piacenza</div>
+              <div class="font-bold text-odeInk">Sede centrale</div>
+              <div class="text-gray-500 text-sm">Stradone Farnese, 26 – Piacenza</div>
             </div>
           </div>
-          <p class="text-odeCream/80 mb-6">
-            Entra senza impegno con il <strong>mese di prova gratuito</strong> come visitatore. Se l'atmosfera e la compagnia saranno di tuo gradimento, potrai diventare socio e accedere liberamente a ore e ore di gioco.
+          <p class="text-gray-600 mb-6">
+            Entra senza impegno con il <strong class="text-odeInk">mese di prova gratuito</strong> come visitatore. Se l'atmosfera e la compagnia saranno di tuo gradimento, potrai diventare socio e accedere liberamente a ore e ore di gioco.
           </p>
-          <ul class="space-y-3 text-odeCream/70">
-            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Novità, prototipi e classiconi</li>
-            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Ambiente pensato per adulti e ragazzi 14+ (accompagnati)</li>
-            <li class="flex items-start gap-3"><span class="text-odeAccentLight mt-1">◈</span> Eventi locali, GiocaCon e serate a tema</li>
+          <ul class="space-y-3 text-gray-600">
+            <li class="flex items-start gap-3"><span class="text-odeAccent mt-1">◈</span> Novità, prototipi e classiconi</li>
+            <li class="flex items-start gap-3"><span class="text-odeAccent mt-1">◈</span> Ambiente pensato per adulti e ragazzi 14+ (accompagnati)</li>
+            <li class="flex items-start gap-3"><span class="text-odeAccent mt-1">◈</span> Eventi locali, GiocaCon e serate a tema</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- Direttivo -->
-  <section id="direttivo" class="py-24 px-6 bg-odeBlack relative">
-    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+  <section id="direttivo" class="py-24 px-6 bg-odePaper relative">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
-      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">Il Direttivo</h2>
-      <p class="text-odeCream/70 max-w-2xl mx-auto">Le persone che ogni giorno tengono in piedi OdE, tra organizzazione, ludoteca ed eventi.</p>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Il Direttivo</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Le persone che ogni giorno tengono in piedi OdE, tra organizzazione, ludoteca ed eventi.</p>
     </div>
 
     <div class="max-w-3xl mx-auto relative reveal">
@@ -391,38 +365,38 @@
         <div id="direttivo-track" class="carousel-track flex transition-transform duration-500 ease-out">
 
           <div class="carousel-slide w-full flex-shrink-0 px-2">
-            <div class="glass rounded-2xl p-8 text-center border border-white/10">
-              <img src="./odino-2-Photoroom.png" alt="Presidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
-              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
-              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Presidente</div>
-              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            <div class="bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-md">
+              <img src="./odino-2-Photoroom.png" alt="Presidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/30" />
+              <div class="font-display font-black text-xl text-odeInk">Nome Cognome</div>
+              <div class="text-odeAccent text-sm font-bold tracking-widest uppercase mt-1 mb-4">Presidente</div>
+              <p class="text-gray-500 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
             </div>
           </div>
 
           <div class="carousel-slide w-full flex-shrink-0 px-2">
-            <div class="glass rounded-2xl p-8 text-center border border-white/10">
-              <img src="./odino-3-Photoroom.png" alt="Vicepresidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
-              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
-              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Vicepresidente</div>
-              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            <div class="bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-md">
+              <img src="./odino-3-Photoroom.png" alt="Vicepresidente" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/30" />
+              <div class="font-display font-black text-xl text-odeInk">Nome Cognome</div>
+              <div class="text-odeAccent text-sm font-bold tracking-widest uppercase mt-1 mb-4">Vicepresidente</div>
+              <p class="text-gray-500 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
             </div>
           </div>
 
           <div class="carousel-slide w-full flex-shrink-0 px-2">
-            <div class="glass rounded-2xl p-8 text-center border border-white/10">
-              <img src="./odino-5-Photoroom.png" alt="Segretario" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
-              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
-              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Segretario</div>
-              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            <div class="bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-md">
+              <img src="./odino-5-Photoroom.png" alt="Segretario" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/30" />
+              <div class="font-display font-black text-xl text-odeInk">Nome Cognome</div>
+              <div class="text-odeAccent text-sm font-bold tracking-widest uppercase mt-1 mb-4">Segretario</div>
+              <p class="text-gray-500 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
             </div>
           </div>
 
           <div class="carousel-slide w-full flex-shrink-0 px-2">
-            <div class="glass rounded-2xl p-8 text-center border border-white/10">
-              <img src="./odino-4-Photoroom.png" alt="Tesoriere" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/40" />
-              <div class="font-display font-black text-xl text-odeCream">Nome Cognome</div>
-              <div class="text-odeAccentLight text-sm font-bold tracking-widest uppercase mt-1 mb-4">Tesoriere</div>
-              <p class="text-odeCream/70 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
+            <div class="bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-md">
+              <img src="./odino-4-Photoroom.png" alt="Tesoriere" class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto mb-6 border-2 border-odeAccent/30" />
+              <div class="font-display font-black text-xl text-odeInk">Nome Cognome</div>
+              <div class="text-odeAccent text-sm font-bold tracking-widest uppercase mt-1 mb-4">Tesoriere</div>
+              <p class="text-gray-500 text-sm max-w-md mx-auto">Breve descrizione del ruolo e della persona all'interno dell'associazione.</p>
             </div>
           </div>
 
@@ -442,141 +416,463 @@
     </div>
   </section>
 
-  <!-- Cifre / Ludoteca -->
-  <section id="cifre" class="py-24 px-6 bg-odeBlack relative">
-    <img
-    src="./odino-3-Photoroom.png"
-    class="odino-bg absolute top-12 right-10 w-80 rotate-12"
-    alt=""
-    >
-    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+  <div class="section-divider"></div>
+
+  <!-- Giochi in Sede -->
+  <section id="giochi" class="py-24 px-6 bg-white">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
-      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">La Ludoteca</h2>
-      <p class="text-odeCream/70 max-w-2xl mx-auto">Un patrimonio di giochi sempre in crescita, gestito da appassionati per appassionati.</p>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Giochi in Sede</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Oltre 300 titoli ti aspettano — dai grandi classici alle ultime novità. Questa è solo una piccola anteprima: vieni in sede per scoprirli tutti.</p>
     </div>
-    
-    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="glass rounded-2xl p-8 text-center social-card reveal">
-        <div class="text-5xl mb-4">🎲</div>
-        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="300">0</div>
-        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Giochi in Ludoteca</div>
+
+    <!-- Griglia giochi -->
+    <div class="max-w-7xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 reveal">
+
+      <!-- Catan -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-amber-50 border border-amber-100 flex items-center justify-center text-4xl mb-4">🏝️</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Catan</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Strategia</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Commercia, costruisci, colonizza. Il classico per eccellenza che ha fatto innamorare milioni di giocatori.</p>
       </div>
-      <div class="glass rounded-2xl p-8 text-center social-card reveal">
-        <div class="text-5xl mb-4">⏳</div>
-        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="800">0</div>
-        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Ore di gioco / anno</div>
+
+      <!-- Pandemic -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-4xl mb-4">🦠</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Pandemic</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Cooperativo</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Salva il mondo lavorando insieme. Il gioco cooperativo che ha ridefinito il genere.</p>
       </div>
-      <div class="glass rounded-2xl p-8 text-center social-card reveal">
-        <div class="text-5xl mb-4">🧙‍♂️</div>
-        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="50">0</div>
-        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Volontari attivi</div>
+
+      <!-- Ticket to Ride -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-4xl mb-4">🚂</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Ticket to Ride</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Famiglia</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Collega le città d'Europa con le tue linee ferroviarie. Facile da imparare, difficile da dimenticare.</p>
       </div>
-      <div class="glass rounded-2xl p-8 text-center social-card reveal">
-        <div class="text-5xl mb-4">🏆</div>
-        <div class="font-display font-black text-4xl text-odeAccentLight counter" data-target="18">0</div>
-        <div class="text-odeCream/60 uppercase tracking-widest text-xs mt-2">Anni di storia</div>
+
+      <!-- Carcassonne -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-green-50 border border-green-100 flex items-center justify-center text-4xl mb-4">🏰</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Carcassonne</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Famiglia</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Posiziona tessere per costruire castelli, strade e campi nel sud della Francia medievale.</p>
+      </div>
+
+      <!-- Wingspan -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-4xl mb-4">🦅</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Wingspan</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Gestione mano</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Attrai uccelli nei tuoi habitat. Un gioco bellissimo e rilassante amato da tutti.</p>
+      </div>
+
+      <!-- 7 Wonders -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-yellow-50 border border-yellow-100 flex items-center justify-center text-4xl mb-4">🏛️</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">7 Wonders</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Card Drafting</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Guida una civiltà antica verso la gloria costruendo una delle meraviglie del mondo antico.</p>
+      </div>
+
+      <!-- Azul -->
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm social-card p-6 flex flex-col items-center text-center">
+        <div class="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-4xl mb-4">🔷</div>
+        <div class="font-display font-black text-base text-odeInk mb-1">Azul</div>
+        <div class="text-xs text-odeAccent font-bold uppercase tracking-widest mb-2">Astratto</div>
+        <p class="text-gray-400 text-xs leading-relaxed">Seleziona piastrelle colorate per decorare le pareti del Palazzo Reale. Elegante e tattico.</p>
+      </div>
+
+      <!-- E tanti altri... -->
+      <div class="bg-odeAccent rounded-2xl shadow-md social-card p-6 flex flex-col items-center justify-center text-center">
+        <div class="text-4xl mb-4">🎲</div>
+        <div class="font-display font-black text-base text-white mb-2">300+ titoli</div>
+        <p class="text-white/80 text-xs leading-relaxed mb-4">Questo è solo un assaggio. Vieni in sede e scopri la nostra intera ludoteca!</p>
+        <a href="#contatti" class="inline-block px-4 py-2 bg-white text-odeAccent text-xs font-bold tracking-widest rounded-lg transition-colors hover:bg-red-50">
+          VIENI A TROVARCI
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Banner CTA -->
+    <div class="max-w-7xl mx-auto mt-12 reveal">
+      <div class="bg-odeAccent/5 border border-odeAccent/15 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="font-display font-black text-2xl text-odeInk mb-1">Vuoi provare un gioco prima di acquistarlo?</div>
+          <p class="text-gray-500 text-sm">In sede puoi giocare a tutto quello che vuoi, con la guida dei nostri volontari. Nessun obbligo di acquisto.</p>
+        </div>
+        <a href="#contatti" class="flex-shrink-0 px-7 py-3.5 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded-xl transition-colors shadow-md shadow-odeAccent/20 text-sm">
+          VIENI IN SEDE
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- GiocaCon -->
-  <section id="giocacon" class="py-24 px-6 bg-odeDark">
+  <div class="section-divider"></div>
+
+  <!-- Cifre / Ludoteca -->
+  <section id="cifre" class="py-24 px-6 bg-odePaper relative">
+    <img src="./odino-3-Photoroom.png" class="odino-bg absolute top-12 right-10 w-80 rotate-12" alt="">
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">La Ludoteca</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Un patrimonio di giochi sempre in crescita, gestito da appassionati per appassionati.</p>
+    </div>
+
+    <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="bg-white rounded-2xl p-8 text-center social-card reveal border border-gray-100 shadow-sm">
+        <div class="text-5xl mb-4">🎲</div>
+        <div class="font-display font-black text-4xl text-odeAccent counter" data-target="300">0</div>
+        <div class="text-gray-500 uppercase tracking-widest text-xs mt-2">Giochi in Ludoteca</div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 text-center social-card reveal border border-gray-100 shadow-sm">
+        <div class="text-5xl mb-4">⏳</div>
+        <div class="font-display font-black text-4xl text-odeAccent counter" data-target="800">0</div>
+        <div class="text-gray-500 uppercase tracking-widest text-xs mt-2">Ore di gioco / anno</div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 text-center social-card reveal border border-gray-100 shadow-sm">
+        <div class="text-5xl mb-4">🧙‍♂️</div>
+        <div class="font-display font-black text-4xl text-odeAccent counter" data-target="50">0</div>
+        <div class="text-gray-500 uppercase tracking-widest text-xs mt-2">Volontari attivi</div>
+      </div>
+      <div class="bg-white rounded-2xl p-8 text-center social-card reveal border border-gray-100 shadow-sm">
+        <div class="text-5xl mb-4">🏆</div>
+        <div class="font-display font-black text-4xl text-odeAccent counter" data-target="18">0</div>
+        <div class="text-gray-500 uppercase tracking-widest text-xs mt-2">Anni di storia</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- GiocaCon — solo esplicativo, nessun link -->
+  <section id="giocacon" class="py-24 px-6 bg-white">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
       <div class="order-2 md:order-1 relative reveal">
-        <div class="absolute -inset-4 bg-odeAccent/10 blur-2xl rounded-full"></div>
-        <div class="relative glass rounded-2xl p-8 border border-white/10 text-center">
-          <div class="text-6xl mb-4 flex justify-center">
-            <img
-            src="./giocacon.png"
-            alt="Orizzonte degli Eventi"
-            class="w-26 h-26 logo-hero"
-            />
+        <div class="absolute -inset-4 bg-odeAccent/6 blur-2xl rounded-full"></div>
+        <div class="relative bg-white rounded-2xl p-8 border border-gray-100 shadow-md text-center">
+          <div class="flex justify-center mb-6">
+            <img src="./giocacon.png" alt="GiocaCon" class="w-28 h-28 logo-hero" />
           </div>
-          <p class="text-odeCream/80 mb-6 text-lg">Dal 2013 la nostra convention per diffondere la passione ludica il più possibile. Un weekend dedicato all'analogico, al divertimento e alla community.</p>
- <a href="https://www.giocacon.it" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-colors">
-            VAI AL SITO <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-          </a>
+          <p class="text-gray-600 text-lg leading-relaxed">
+            Dal 2013 la nostra convention per diffondere la passione ludica il più possibile.
+            Un weekend dedicato all'analogico, al divertimento e alla community.
+          </p>
+          <!-- Dettagli aggiuntivi -->
+          <div class="mt-6 grid grid-cols-2 gap-3 text-left">
+            <div class="bg-odeAccent/5 rounded-lg p-3">
+              <div class="text-xs text-gray-400 uppercase tracking-wider mb-0.5">Edizioni</div>
+              <div class="font-bold text-odeInk">Dal 2013</div>
+            </div>
+            <div class="bg-odeAccent/5 rounded-lg p-3">
+              <div class="text-xs text-gray-400 uppercase tracking-wider mb-0.5">Luogo</div>
+              <div class="font-bold text-odeInk">Piacenza</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="order-1 md:order-2 reveal">
         <div class="gradient-bar mb-6"></div>
-        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeCream">Organizziamo<br/>GiocaCon.</h2>
-        <p class="text-odeCream/80 text-lg leading-relaxed mb-6">
-          Ogni anno portiamo a Piacenza la più grande celebrazione del gioco da tavolo: tornei, aree free-play, presentazioni di anteprime e la presenza di autori e case editrici.
+        <h2 class="font-display font-black text-4xl md:text-5xl mb-6 text-odeInk">Organizziamo<br/>GiocaCon.</h2>
+        <p class="text-gray-600 text-lg leading-relaxed mb-6">
+          Ogni anno portiamo a Piacenza la più grande celebrazione del gioco da tavolo: tornei, aree free-play,
+          presentazioni di anteprime e la presenza di autori e case editrici.
         </p>
-        <p class="text-odeCream/70 leading-relaxed">
-          Ma il nostro impegno non si ferma alla convention: trovate i tavoli OdE anche nelle manifestazioni locali, dalle serate estive a Grazzano Visconti ai numerosi eventi in città e provincia.
+        <p class="text-gray-500 leading-relaxed mb-6">
+          Ma il nostro impegno non si ferma alla convention: trovate i tavoli OdE anche nelle manifestazioni locali,
+          dalle serate estive a Grazzano Visconti ai numerosi eventi in città e provincia.
         </p>
+        <div class="flex flex-wrap gap-3">
+          <span class="px-4 py-2 bg-odeAccent/8 border border-odeAccent/20 text-odeAccent text-xs font-bold tracking-widest rounded-full">TORNEI</span>
+          <span class="px-4 py-2 bg-odeAccent/8 border border-odeAccent/20 text-odeAccent text-xs font-bold tracking-widest rounded-full">FREE-PLAY</span>
+          <span class="px-4 py-2 bg-odeAccent/8 border border-odeAccent/20 text-odeAccent text-xs font-bold tracking-widest rounded-full">ANTEPRIME</span>
+          <span class="px-4 py-2 bg-odeAccent/8 border border-odeAccent/20 text-odeAccent text-xs font-bold tracking-widest rounded-full">AUTORI &amp; EDITORI</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Social Section -->
-  <section id="social" class="py-24 px-6 bg-odeBlack relative">
-    <img
-    src="./odino-4-Photoroom.png"
-    class="odino-bg absolute right-0 w-[430px]"
-    alt=""
-    >
-    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+  <div class="section-divider"></div>
+
+  <!-- Calendario -->
+  <section id="calendario" class="py-24 px-6 bg-white">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
-      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">Segui OdE</h2>
-      <p class="text-odeCream/70 max-w-2xl mx-auto">Resta aggiornato su eventi, live, unboxing e le serate in sede sui nostri canali social.</p>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Quando Giochiamo</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Appuntamenti fissi ogni settimana — entra quando vuoi, siediti a un tavolo e inizia a giocare.</p>
+    </div>
+
+    <div class="max-w-5xl mx-auto reveal">
+
+      <!-- Settimana tipo -->
+      <div class="mb-10">
+        <div class="text-xs text-gray-400 uppercase tracking-widest text-center mb-5 font-semibold">Settimana tipo</div>
+        <div class="grid grid-cols-7 gap-2">
+
+          <!-- Lunedì -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Lun</div>
+            <div class="w-full rounded-2xl bg-odeAccent text-white p-3 md:p-4 text-center shadow-md shadow-odeAccent/20 flex flex-col items-center gap-1">
+              <span class="text-xl md:text-2xl">🎲</span>
+              <span class="font-display font-black text-xs md:text-sm leading-tight">Serata<br class="hidden md:block"/> Soci</span>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-odeAccent font-bold">Soci</span>
+            </div>
+          </div>
+
+          <!-- Martedì -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Mar</div>
+            <div class="w-full rounded-2xl bg-gray-50 border border-gray-100 p-3 md:p-4 text-center flex flex-col items-center gap-1 min-h-[88px]">
+              <span class="text-gray-200 text-xl md:text-2xl">—</span>
+            </div>
+          </div>
+
+          <!-- Mercoledì -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Mer</div>
+            <div class="w-full rounded-2xl bg-gray-50 border border-gray-100 p-3 md:p-4 text-center flex flex-col items-center gap-1 min-h-[88px]">
+              <span class="text-gray-200 text-xl md:text-2xl">—</span>
+            </div>
+          </div>
+
+          <!-- Giovedì -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Gio</div>
+            <div class="w-full rounded-2xl bg-gray-50 border border-gray-100 p-3 md:p-4 text-center flex flex-col items-center gap-1 min-h-[88px]">
+              <span class="text-gray-200 text-xl md:text-2xl">—</span>
+            </div>
+          </div>
+
+          <!-- Venerdì -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Ven</div>
+            <div class="w-full rounded-2xl bg-odeAccent text-white p-3 md:p-4 text-center shadow-md shadow-odeAccent/20 flex flex-col items-center gap-1">
+              <span class="text-xl md:text-2xl">🎲</span>
+              <span class="font-display font-black text-xs md:text-sm leading-tight">Serata<br class="hidden md:block"/> Soci</span>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-odeAccent font-bold">Soci</span>
+            </div>
+          </div>
+
+          <!-- Sabato -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Sab</div>
+            <div class="w-full rounded-2xl bg-gray-50 border border-gray-100 p-3 md:p-4 text-center flex flex-col items-center gap-1 min-h-[88px]">
+              <span class="text-gray-200 text-xl md:text-2xl">—</span>
+            </div>
+          </div>
+
+          <!-- Domenica (2ª del mese = Ludomenica) -->
+          <div class="flex flex-col items-center">
+            <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Dom</div>
+            <div class="w-full rounded-2xl bg-amber-50 border-2 border-amber-300 p-3 md:p-4 text-center flex flex-col items-center gap-1">
+              <span class="text-xl md:text-2xl">☀️</span>
+              <span class="font-display font-black text-xs md:text-sm text-amber-700 leading-tight">Ludo<br class="hidden md:block"/>menica</span>
+            </div>
+            <div class="mt-2 text-center">
+              <span class="text-xs text-amber-600 font-bold">2ª del mese</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Schede dettaglio -->
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
+
+        <!-- Serata Soci -->
+        <div class="bg-odeAccent/5 border border-odeAccent/20 rounded-2xl p-7 flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-odeAccent flex items-center justify-center text-white text-2xl flex-shrink-0 shadow-md shadow-odeAccent/20">🎲</div>
+          <div>
+            <div class="font-display font-black text-lg text-odeInk mb-0.5">Serata Soci</div>
+            <div class="text-odeAccent text-xs font-bold uppercase tracking-widest mb-3">Lunedì &amp; Venerdì — settimanale</div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Le nostre serate ricorrenti dedicate ai soci. Si apre la ludoteca, si tirano fuori i giochi e si gioca finché si vuole.
+              Atmosfera rilassata, compagnia garantita. Riservato ai soci OdE.
+            </p>
+          </div>
+        </div>
+
+        <!-- Ludomenica -->
+        <div class="bg-amber-50 border-2 border-amber-200 rounded-2xl p-7 flex gap-5 items-start">
+          <div class="w-12 h-12 rounded-xl bg-amber-400 flex items-center justify-center text-white text-2xl flex-shrink-0 shadow-md shadow-amber-300/40">☀️</div>
+          <div>
+            <div class="font-display font-black text-lg text-odeInk mb-0.5">LUDOMENICA</div>
+            <div class="text-amber-600 text-xs font-bold uppercase tracking-widest mb-3">2ª Domenica del mese — aperto a tutti</div>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Una domenica al mese apriamo le porte a chiunque voglia provare i giochi da tavolo. Nessuna tessera richiesta,
+              solo tanta voglia di divertirsi. I nostri volontari ti guidano nella scelta e nelle regole.
+            </p>
+            <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 border border-amber-300 rounded-full text-xs font-bold text-amber-700">
+              ✅ Ingresso libero · Aperto a tutti
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Legenda / nota -->
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-500">
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded bg-odeAccent inline-block"></span>
+          <span>Serata Soci — riservata ai tesserati</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-4 h-4 rounded bg-amber-300 inline-block"></span>
+          <span>Ludomenica — aperta a tutti, ingresso libero</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ═══════════════════════════════════════════
+       Galleria Foto
+       ═══════════════════════════════════════════ -->
+  <section id="galleria" class="py-24 px-6 bg-odePaper">
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">La Nostra Galleria</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Momenti, serate, eventi — i ricordi che costruiamo insieme attorno a un tavolo.</p>
+    </div>
+
+    <!-- Griglia mista: alcune foto più grandi per varietà visiva -->
+    <div class="max-w-7xl mx-auto reveal">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+        <!-- Foto grande (span 2 colonne) -->
+        <div class="photo-slot aspect-video md:col-span-2">
+          <!-- Sostituisci con: <img src="./evento-1.jpg" alt="Serata OdE"> -->
+          <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Foto in evidenza (16:9)</span>
+        </div>
+
+        <!-- Foto quadrata -->
+        <div class="photo-slot aspect-square">
+          <svg class="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Aggiungi foto</span>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="photo-slot aspect-square">
+          <svg class="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Aggiungi foto</span>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="photo-slot aspect-square">
+          <svg class="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Aggiungi foto</span>
+        </div>
+
+        <!-- Seconda foto grande (span 2) -->
+        <div class="photo-slot aspect-video md:col-span-2">
+          <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Foto in evidenza (16:9)</span>
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="photo-slot aspect-square">
+          <svg class="w-10 h-10 text-gray-300 mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
+          </svg>
+          <span class="text-xs text-gray-400 font-medium">Aggiungi foto</span>
+        </div>
+
+      </div>
+      <p class="text-center text-xs text-gray-400 mt-6">
+        Per aggiungere le foto sostituisci ogni placeholder con: <code class="bg-gray-100 px-2 py-0.5 rounded text-gray-600">&lt;img src="./foto.jpg" alt="..." class="w-full h-full object-cover"&gt;</code>
+      </p>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Social Section -->
+  <section id="social" class="py-24 px-6 bg-white relative">
+    <img src="./odino-4-Photoroom.png" class="odino-bg absolute right-0 w-[430px]" alt="">
+    <div class="max-w-7xl mx-auto text-center mb-16 reveal">
+      <div class="gradient-bar mx-auto mb-6"></div>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Segui OdE</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Resta aggiornato su eventi, live, unboxing e le serate in sede sui nostri canali social.</p>
     </div>
 
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
       <!-- YouTube -->
-      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+      <div class="bg-white rounded-2xl overflow-hidden social-card reveal group border border-gray-100 shadow-sm">
         <div class="h-2 bg-red-600"></div>
         <div class="p-8">
           <div class="flex items-center gap-3 mb-4">
             <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 00.5 6.19 31.5 31.5 0 000 12a31.5 31.5 0 00.5 5.81 3.02 3.02 0 002.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 002.12-2.14A31.5 31.5 0 0024 12a31.5 31.5 0 00-.5-5.81zM9.55 15.5V8.5l6.27 3.5-6.27 3.5z"/></svg>
-            <span class="font-display font-bold text-xl text-white">YouTube</span>
+            <span class="font-display font-bold text-xl text-gray-900">YouTube</span>
           </div>
-          <p class="text-odeCream/70 mb-6 text-sm">Gameplay, tutorial, interviste e report dalle nostre serate.</p>
-          <div class="aspect-video bg-black/40 rounded flex items-center justify-center mb-4 border border-white/10">
-            <span class="text-odeCream/40 text-sm">Anteprima canale</span>
+          <p class="text-gray-500 mb-6 text-sm">Gameplay, tutorial, interviste e report dalle nostre serate.</p>
+          <div class="aspect-video bg-gray-50 rounded flex items-center justify-center mb-4 border border-gray-100">
+            <span class="text-gray-400 text-sm">Anteprima canale</span>
           </div>
-          <a href="https://www.youtube.com/@orizzontedeglieventipiacenza" target="_blank" class="block w-full text-center px-4 py-3 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-bold tracking-wider text-xs rounded transition-colors border border-red-500/30">
+          <a href="https://www.youtube.com/@orizzontedeglieventipiacenza" target="_blank" class="block w-full text-center px-4 py-3 bg-red-50 hover:bg-red-100 text-red-600 font-bold tracking-wider text-xs rounded transition-colors border border-red-200">
             VISITA IL CANALE
           </a>
         </div>
       </div>
 
       <!-- Instagram -->
-      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+      <div class="bg-white rounded-2xl overflow-hidden social-card reveal group border border-gray-100 shadow-sm">
         <div class="h-2 bg-pink-600"></div>
         <div class="p-8">
           <div class="flex items-center gap-3 mb-4">
-            <svg class="w-8 h-8 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.24 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.23.23 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.16 4.35 2.63 6.82 6.98 6.98 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 4.35-.16 6.82-2.63 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.16-4.35-2.63-6.82-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a44 0 110-8 4 4 0 010 8zm7.85-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
-            <span class="font-display font-bold text-xl text-white">Instagram</span>
+            <svg class="w-8 h-8 text-pink-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85 0 3.2-.01 3.58-.07 4.85-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07-3.2 0-3.58-.01-4.85-.07-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.65-.07-4.85 0-3.2.01-3.58.07-4.85.15-3.24 1.67-4.77 4.92-4.92 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 2.7.23.23 2.7.07 7.05.01 8.33 0 8.74 0 12c0 3.26.01 3.67.07 4.95.16 4.35 2.63 6.82 6.98 6.98 1.28.06 1.69.07 4.95.07 3.26 0 3.67-.01 4.95-.07 4.35-.16 6.82-2.63 6.98-6.98.06-1.28.07-1.69.07-4.95 0-3.26-.01-3.67-.07-4.95-.16-4.35-2.63-6.82-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 100 12.32 6.16 6.16 0 000-12.32zM12 16a4 4 0 110-8 4 4 0 010 8zm7.85-10.4a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/></svg>
+            <span class="font-display font-bold text-xl text-gray-900">Instagram</span>
           </div>
-          <p class="text-odeCream/70 mb-6 text-sm">Foto delle serate, storie in diretta e tutto il dietro le quinte.</p>
+          <p class="text-gray-500 mb-6 text-sm">Foto delle serate, storie in diretta e tutto il dietro le quinte.</p>
           <div class="grid grid-cols-3 gap-2 mb-4">
-            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
-            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
-            <div class="aspect-square bg-white/5 rounded border border-white/10"></div>
+            <div class="aspect-square bg-gray-50 rounded border border-gray-100"></div>
+            <div class="aspect-square bg-gray-50 rounded border border-gray-100"></div>
+            <div class="aspect-square bg-gray-50 rounded border border-gray-100"></div>
           </div>
-          <a href="https://www.instagram.com/orizzontedeglieventiode" target="_blank" class="block w-full text-center px-4 py-3 bg-pink-600/20 hover:bg-pink-600/30 text-pink-400 font-bold tracking-wider text-xs rounded transition-colors border border-pink-500/30">
-            SEGUICI SU INSTAGRAM </a>
+          <a href="https://www.instagram.com/orizzontedeglieventiode" target="_blank" class="block w-full text-center px-4 py-3 bg-pink-50 hover:bg-pink-100 text-pink-600 font-bold tracking-wider text-xs rounded transition-colors border border-pink-200">
+            SEGUICI SU INSTAGRAM
+          </a>
         </div>
       </div>
 
-      <!-- Facebook / Social Misto -->
-      <div class="glass rounded-2xl overflow-hidden social-card reveal group border border-white/5">
+      <!-- Facebook -->
+      <div class="bg-white rounded-2xl overflow-hidden social-card reveal group border border-gray-100 shadow-sm">
         <div class="h-2 bg-blue-500"></div>
         <div class="p-8">
           <div class="flex items-center gap-3 mb-4">
             <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.12 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg>
-            <span class="font-display font-bold text-xl text-white">Facebook</span>
+            <span class="font-display font-bold text-xl text-gray-900">Facebook</span>
           </div>
-          <p class="text-odeCream/70 mb-6 text-sm">Eventi, discussioni di gruppo, comunicazioni e aggiornamenti ufficiali.</p>
-          <div class="aspect-video bg-black/40 rounded flex items-center justify-center mb-4 border border-white/10">
-            <span class="text-odeCream/40 text-sm">Community</span>
+          <p class="text-gray-500 mb-6 text-sm">Eventi, discussioni di gruppo, comunicazioni e aggiornamenti ufficiali.</p>
+          <div class="aspect-video bg-gray-50 rounded flex items-center justify-center mb-4 border border-gray-100">
+            <span class="text-gray-400 text-sm">Community</span>
           </div>
-          <a href="https://www.facebook.com/OdEPiacenza/?locale=it_IT" target="_blank" class="block w-full text-center px-4 py-3 bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 font-bold tracking-wider text-xs rounded transition-colors border border-blue-500/30">
+          <a href="https://www.facebook.com/OdEPiacenza/?locale=it_IT" target="_blank" class="block w-full text-center px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 font-bold tracking-wider text-xs rounded transition-colors border border-blue-200">
             UNISCITI SU FACEBOOK
           </a>
         </div>
@@ -585,143 +881,109 @@
     <span id="diventa-socio"></span>
   </section>
 
+  <div class="section-divider"></div>
+
   <!-- Sostienici -->
-  <section id="sostienici" class="py-24 px-6 bg-odeBlack relative">
-    <div class="absolute top-0 left-0 w-full h-px bg-odeAccent/30"></div>
+  <section id="sostienici" class="py-24 px-6 bg-odePaper relative">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
-      <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-4">
-        Sostieni OdE
-      </h2>
-      <p class="text-odeCream/70 max-w-2xl mx-auto">
-        Aiutaci a far crescere la nostra associazione, la ludoteca e gli eventi
-        che organizziamo per la comunità.
-      </p>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Sostieni OdE</h2>
+      <p class="text-gray-500 max-w-2xl mx-auto">Aiutaci a far crescere la nostra associazione, la ludoteca e gli eventi che organizziamo per la comunità.</p>
     </div>
     <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
 
       <!-- 5x1000 -->
-      <div class="glass rounded-2xl p-8 border border-white/10 reveal">
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal">
         <div class="text-5xl mb-4">❤️</div>
-        <h3 class="font-display font-black text-2xl text-odeAccentLight mb-4">
-          Dona il tuo 5×1000
-        </h3>
-        <p class="text-odeCream/80 mb-6">
-          Con la dichiarazione dei redditi puoi destinare il tuo
-          <strong>5×1000</strong> a Orizzonte degli Eventi senza alcun costo
-          aggiuntivo.
+        <h3 class="font-display font-black text-2xl text-odeAccent mb-4">Dona il tuo 5×1000</h3>
+        <p class="text-gray-600 mb-6">
+          Con la dichiarazione dei redditi puoi destinare il tuo <strong>5×1000</strong> a Orizzonte degli Eventi senza alcun costo aggiuntivo.
         </p>
-        <div class="bg-black/30 rounded-xl p-6 border border-odeAccent/20">
-          <div class="text-xs uppercase tracking-widest text-odeCream/50 mb-2">
-            Codice Fiscale
-          </div>
-          <div class="font-display text-3xl text-white font-black tracking-wider">
-            INSERISCI-QUI-IL-CODICE-FISCALE
-          </div>
+        <div class="bg-odeAccent/5 border border-odeAccent/15 rounded-xl p-6">
+          <div class="text-xs uppercase tracking-widest text-gray-400 mb-2">Codice Fiscale</div>
+          <div class="font-display text-2xl text-odeInk font-black tracking-wider break-all">INSERISCI-QUI-IL-CODICE-FISCALE</div>
         </div>
-
-        <p class="text-sm text-odeCream/60 mt-4">
-          Firma nel riquadro dedicato al sostegno degli Enti del Terzo Settore
-          e inserisci il nostro codice fiscale.
-        </p>
+        <p class="text-sm text-gray-400 mt-4">Firma nel riquadro dedicato al sostegno degli Enti del Terzo Settore e inserisci il nostro codice fiscale.</p>
       </div>
 
       <!-- Donazione libera -->
-      <div class="glass rounded-2xl p-8 border border-white/10 reveal">
-
+      <div class="bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal">
         <div class="text-5xl mb-4">🎲</div>
-        <h3 class="font-display font-black text-2xl text-odeAccentLight mb-4">
-          Donazione libera
-        </h3>
-        <p class="text-odeCream/80 mb-6">
-          Puoi sostenere direttamente l'associazione con una donazione volontaria.
-          Ogni contributo ci aiuta a mantenere la ludoteca, acquistare nuovi
-          giochi e organizzare eventi aperti al pubblico.
+        <h3 class="font-display font-black text-2xl text-odeAccent mb-4">Donazione libera</h3>
+        <p class="text-gray-600 mb-6">
+          Puoi sostenere direttamente l'associazione con una donazione volontaria. Ogni contributo ci aiuta a mantenere la ludoteca, acquistare nuovi giochi e organizzare eventi aperti al pubblico.
         </p>
         <div class="space-y-3">
-          <div class="bg-black/30 rounded-lg p-4">
-            <div class="text-xs uppercase text-odeCream/50">
-              Intestatario
-            </div>
-            <div class="text-white font-bold">
-              Orizzonte degli Eventi APS
-            </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-lg p-4">
+            <div class="text-xs uppercase text-gray-400">Intestatario</div>
+            <div class="text-gray-900 font-bold">Orizzonte degli Eventi APS</div>
           </div>
-          <div class="bg-black/30 rounded-lg p-4">
-            <div class="text-xs uppercase text-odeCream/50">
-              IBAN
-            </div>
-            <div class="text-white font-bold break-all">
-              IT00 X000 0000 0000 0000 0000 000
-            </div>
+          <div class="bg-gray-50 border border-gray-100 rounded-lg p-4">
+            <div class="text-xs uppercase text-gray-400">IBAN</div>
+            <div class="text-gray-900 font-bold break-all">IT00 X000 0000 0000 0000 0000 000</div>
           </div>
         </div>
-        <p class="text-sm text-odeCream/60 mt-4">
-          Inserisci nella causale "Donazione a sostegno dell'associazione".
-        </p>
+        <p class="text-sm text-gray-400 mt-4">Inserisci nella causale "Donazione a sostegno dell'associazione".</p>
       </div>
     </div>
   </section>
 
+  <div class="section-divider"></div>
 
   <!-- Contatti & CTA -->
-  <section id="contatti" class="py-24 px-6 bg-odeDark">
-    <img
-    src="./odino-5-Photoroom.png"
-    class="odino-bg absolute right-0 w-[430px]"
-    alt=""
-    >
+  <section id="contatti" class="py-24 px-6 bg-white">
+    <img src="./odino-5-Photoroom.png" class="odino-bg absolute right-0 w-[430px]" alt="">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
       <div class="reveal">
         <div class="gradient-bar mb-6"></div>
-        <h2 class="font-display font-black text-4xl md:text-5xl text-odeCream mb-6">Vieni a<br/>trovarci.</h2>
-        <p class="text-odeCream/80 text-lg leading-relaxed mb-8">
-          La nostra sede è a <strong class="text-odeAccentLight">Piacenza</strong>, in Stradone Farnese. Ti aspettiamo per farti provare i nostri giochi e conoscere la community.
+        <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-6">Vieni a<br/>trovarci.</h2>
+        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+          La nostra sede è a <strong class="text-odeAccent">Piacenza</strong>, in Stradone Farnese. Ti aspettiamo per farti provare i nostri giochi e conoscere la community.
         </p>
         <div class="space-y-5">
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">📍</div>
+            <div class="w-10 h-10 rounded-full bg-odeAccent/10 flex items-center justify-center text-odeAccent">📍</div>
             <div>
-              <div class="font-bold text-odeCream">Sede</div>
-              <div class="text-odeCream/60 text-sm">Stradone Farnese, 26 – 29121 Piacenza (PC)</div>
+              <div class="font-bold text-odeInk">Sede</div>
+              <div class="text-gray-500 text-sm">Stradone Farnese, 26 – 29121 Piacenza (PC)</div>
             </div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">✉️</div>
+            <div class="w-10 h-10 rounded-full bg-odeAccent/10 flex items-center justify-center text-odeAccent">✉️</div>
             <div>
-              <div class="font-bold text-odeCream">Email</div>
-              <div class="text-odeCream/60 text-sm">info@orizzonteventi.org</div>
+              <div class="font-bold text-odeInk">Email</div>
+              <div class="text-gray-500 text-sm">info@orizzonteventi.org</div>
             </div>
           </div>
           <div class="flex items-center gap-4">
-            <div class="w-10 h-10 rounded-full bg-odeAccent/20 flex items-center justify-center text-odeAccentLight">📱</div>
+            <div class="w-10 h-10 rounded-full bg-odeAccent/10 flex items-center justify-center text-odeAccent">📱</div>
             <div>
-              <div class="font-bold text-odeCream">Telefono</div>
-              <div class="text-odeCream/60 text-sm">+39 342 777 9234</div>
+              <div class="font-bold text-odeInk">Telefono</div>
+              <div class="text-gray-500 text-sm">+39 342 777 9234</div>
             </div>
           </div>
         </div>
       </div>
-      
+
       <div class="reveal relative">
-        <div class="absolute -inset-4 bg-odeAccent/10 blur-2xl rounded-full"></div>
-        <div class="relative glass rounded-2xl p-8 md:p-10 border border-white/10">
-          <h3 class="font-display font-black text-2xl text-odeAccentLight mb-2">Diventa Socio!</h3>
-          <p class="text-odeCream/70 mb-6 text-sm">Compila il form per richiedere informazioni o il mese di prova. Ti risponderemo al più presto.</p>
-          <form onsubmit="event.preventDefault(); this.innerHTML='<div class=\'text-center py-8\'><div class=\'text-odeAccentLight text-5xl mb-4\'>🎲</div><div class=\'font-bold text-odeCream\'>Messaggio inviato!</div><div class=\'text-odeCream/60 text-sm mt-2\'>Ti contatteremo presto.</div></div>';" class="space-y-4">
+        <div class="absolute -inset-4 bg-odeAccent/6 blur-2xl rounded-full"></div>
+        <div class="relative bg-white rounded-2xl p-8 md:p-10 border border-gray-100 shadow-md">
+          <h3 class="font-display font-black text-2xl text-odeAccent mb-2">Diventa Socio!</h3>
+          <p class="text-gray-500 mb-6 text-sm">Compila il form per richiedere informazioni o il mese di prova. Ti risponderemo al più presto.</p>
+          <form onsubmit="event.preventDefault(); this.innerHTML='<div class=\'text-center py-8\'><div class=\'text-odeAccent text-5xl mb-4\'>🎲</div><div class=\'font-bold text-odeInk\'>Messaggio inviato!</div><div class=\'text-gray-500 text-sm mt-2\'>Ti contatteremo presto.</div></div>';" class="space-y-4">
             <div>
-              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Nome</label>
-              <input type="text" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="Il tuo nome" />
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Nome</label>
+              <input type="text" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-odeAccent focus:ring-1 focus:ring-odeAccent/20 transition-colors" placeholder="Il tuo nome" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Email</label>
-              <input type="email" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="email@esempio.it" />
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Email</label>
+              <input type="email" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-odeAccent focus:ring-1 focus:ring-odeAccent/20 transition-colors" placeholder="email@esempio.it" />
             </div>
             <div>
-              <label class="block text-xs font-bold text-odeCream/60 uppercase tracking-wider mb-1.5">Messaggio</label>
-              <textarea rows="3" required class="w-full px-4 py-3 rounded bg-white/5 border border-white/10 text-odeCream placeholder-odeCream/30 focus:outline-none focus:border-odeAccentLight transition-colors" placeholder="Scrivi il tuo messaggio..."></textarea>
+              <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1.5">Messaggio</label>
+              <textarea rows="3" required class="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:border-odeAccent focus:ring-1 focus:ring-odeAccent/20 transition-colors" placeholder="Scrivi il tuo messaggio..."></textarea>
             </div>
-            <button type="submit" class="w-full py-3.5 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded transition-colors shadow-lg shadow-odeAccent/20">
+            <button type="submit" class="w-full py-3.5 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded-lg transition-colors shadow-md shadow-odeAccent/20">
               INVIA RICHIESTA
             </button>
           </form>
@@ -731,21 +993,22 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-odeBlack border-t border-white/5 pt-16 pb-8 px-6 text-center">
+  <footer class="bg-odeInk border-t border-white/5 pt-16 pb-8 px-6 text-center">
     <div class="max-w-7xl mx-auto mb-12">
-      <div class="flex items-center justify-center gap-2 font-display font-black text-2xl tracking-tighter text-odeCream mb-6">
+      <div class="flex items-center justify-center gap-2 font-display font-black text-2xl tracking-tighter text-white mb-6">
         <span class="text-odeAccent">◈</span> ODE
       </div>
-      <div class="flex flex-wrap justify-center gap-6 text-sm font-bold uppercase tracking-widest text-odeCream/50">
-        <a href="https://www.facebook.com/orizzonteventi" target="_blank" class="hover:text-odeAccentLight transition-colors">Facebook</a>
-        <a href="https://www.instagram.com/orizzonteventi/" target="_blank" class="hover:text-odeAccentLight transition-colors">Instagram</a>
-        <a href="https://www.youtube.com/@orizzonteventi" target="_blank" class="hover:text-odeAccentLight transition-colors">YouTube</a>
- <a href="https://www.giocacon.it" target="_blank" class="hover:text-odeAccentLight transition-colors">GiocaCon</a>
+      <div class="flex flex-wrap justify-center gap-6 text-sm font-bold uppercase tracking-widest text-white/50">
+        <a href="https://www.facebook.com/orizzonteventi"    target="_blank" class="hover:text-odeAccentLight transition-colors">Facebook</a>
+        <a href="https://www.instagram.com/orizzonteventi/"  target="_blank" class="hover:text-odeAccentLight transition-colors">Instagram</a>
+        <a href="https://www.youtube.com/@orizzonteventi"    target="_blank" class="hover:text-odeAccentLight transition-colors">YouTube</a>
+        <a href="https://www.giocacon.it"                    target="_blank" class="hover:text-odeAccentLight transition-colors">GiocaCon</a>
       </div>
     </div>
-    <div class="text-odeCream/30 text-xs max-w-2xl mx-auto leading-relaxed">
+    <div class="text-white/30 text-xs max-w-2xl mx-auto leading-relaxed">
       ©2026 Orizzonte degli Eventi – Associazione Culturale Ludica | Piacenza.<br/>
-      No profit. Tutti i diritti riservati. <span class="block mt-1">Sede: Stradone Farnese, 26 – 29121 Piacenza (PC) – Tel. +39 342 777 9234</span>
+      No profit. Tutti i diritti riservati.
+      <span class="block mt-1">Sede: Stradone Farnese, 26 – 29121 Piacenza (PC) – Tel. +39 342 777 9234</span>
     </div>
   </footer>
 
@@ -755,12 +1018,15 @@
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
 
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
+    });
+
     // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
@@ -786,13 +1052,13 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('.counter').forEach(el => countObserver.observe(el));
 
-    // Navbar blur on scroll
+    // Navbar shadow on scroll
     window.addEventListener('scroll', () => {
       const nav = document.getElementById('navbar');
       if (window.scrollY > 50) {
-        nav.classList.add('shadow-lg', 'bg-odeBlack/80');
+        nav.classList.add('shadow-md');
       } else {
-        nav.classList.remove('shadow-lg', 'bg-odeBlack/80');
+        nav.classList.remove('shadow-md');
       }
     });
 
@@ -807,7 +1073,6 @@
       let index = 0;
       let autoplayTimer = null;
 
-      // Crea i puntini
       slides.forEach((_, i) => {
         const dot = document.createElement('button');
         dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -821,37 +1086,27 @@
         track.style.transform = `translateX(-${index * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle('active', i === index));
       }
-
       function goTo(i) {
         index = (i + slides.length) % slides.length;
         update();
         restartAutoplay();
       }
-
       function next() { goTo(index + 1); }
       function prev() { goTo(index - 1); }
 
       prevBtn.addEventListener('click', prev);
       nextBtn.addEventListener('click', next);
 
-      function startAutoplay() {
-        autoplayTimer = setInterval(next, 6000);
-      }
-      function restartAutoplay() {
-        clearInterval(autoplayTimer);
-        startAutoplay();
-      }
+      function startAutoplay()   { autoplayTimer = setInterval(next, 6000); }
+      function restartAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
       startAutoplay();
 
-      // Swipe touch
-      let startX = 0;
-      let isDragging = false;
+      let startX = 0, isDragging = false;
       track.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         isDragging = true;
         clearInterval(autoplayTimer);
       }, { passive: true });
-
       track.addEventListener('touchend', (e) => {
         if (!isDragging) return;
         isDragging = false;
