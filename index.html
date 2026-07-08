@@ -175,7 +175,7 @@
       position: absolute;
       pointer-events: none;
       user-select: none;
-      opacity: .14;
+      opacity: .60;
       z-index: 0;
       max-width: 45vw;
       filter: drop-shadow(0 0 25px rgba(221,51,51,.2));
@@ -185,9 +185,9 @@
       .odino-bg { opacity: .10; width: 140px !important; max-width: 38vw; }
     }
     @keyframes odinoFloat {
-      0%   { transform: translateY(0px)   rotate(0deg); }
-      50%  { transform: translateY(-15px) rotate(2deg); }
-      100% { transform: translateY(0px)   rotate(0deg); }
+      0%   { transform: translateY(0px)   rotate(0deg) scaleX(-1); }
+      50%  { transform: translateY(-15px) rotate(2deg) scaleX(-1); }
+      100% { transform: translateY(0px)   rotate(0deg) scaleX(-1); }
     }
     .odino-bg { animation: odinoFloat 8s ease-in-out infinite; }
 
@@ -502,7 +502,7 @@
       <div class="bg-odeAccent/5 border border-odeAccent/15 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
           <div class="font-display font-black text-2xl text-odeInk mb-1">Vuoi provare un gioco prima di acquistarlo?</div>
-          <p class="text-gray-500 text-sm">In sede puoi giocare a tutto quello che vuoi, con la guida dei nostri volontari. Nessun obbligo di acquisto.</p>
+          <p class="text-gray-500 text-sm">In sede puoi giocare a tutto quello che vuoi, con la guida dei nostri volontari.</p>
         </div>
         <a href="#contatti" class="flex-shrink-0 px-7 py-3.5 bg-odeAccent hover:bg-odeAccentLight text-white font-bold tracking-widest rounded-xl transition-colors shadow-md shadow-odeAccent/20 text-sm">
           VIENI IN SEDE
@@ -738,6 +738,7 @@
        Galleria Foto
        ═══════════════════════════════════════════ -->
   <section id="galleria" class="py-24 px-6 bg-odePaper">
+    <img src="./odino-4-Photoroom.png" class="odino-bg absolute top-1/3 right-0 w-[430px] -scale-x-100" alt="">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
       <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">La Nostra Galleria</h2>
@@ -814,7 +815,6 @@
 
   <!-- Social Section -->
   <section id="social" class="py-24 px-6 bg-white relative">
-    <img src="./odino-4-Photoroom.png" class="odino-bg absolute right-0 w-[430px]" alt="">
     <div class="max-w-7xl mx-auto text-center mb-16 reveal">
       <div class="gradient-bar mx-auto mb-6"></div>
       <h2 class="font-display font-black text-4xl md:text-5xl text-odeInk mb-4">Segui OdE</h2>
